@@ -1,0 +1,32 @@
+---
+import UserInteraction from "./UserInteraction.astro";
+---
+
+<main>
+	<header class="h-options">
+		<ul>
+			<li>
+				<a href="/manual">User Manual</a>
+			</li>
+			<li>
+				<a href="https://github.com/barrientosvctor" target="_blank">GitHub</a>
+			</li>
+		</ul>
+	</header>
+
+	<UserInteraction />
+</main>
+
+<style>
+	* {
+        margin: 0;
+        padding: 0;
+    }
+
+	.h-options {
+		display: flex;
+		flex-direction: row;
+		justify-self: center;
+		justify-items: center;
+	}
+</style>
