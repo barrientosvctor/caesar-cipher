@@ -1,0 +1,82 @@
+<div class="cipher-options">
+    <button id="encrypt-btn">Encrypt</button>
+    <button id="decrypt-btn">Decrypt</button>
+</div>
+
+<div class="language-options">
+    <button id="english-btn">English vocabulary</button>
+    <button id="spanish-btn">Spanish vocabulary</button>
+</div>
+
+<summary>
+    <ul>
+        <li>
+            <span class="bold-text">Action mode: </span>
+            <span id="summary-action">Encrypt</span>
+        </li>
+        <li>
+            <span class="bold-text">Language selected: </span>
+            <span id="summary-language">English</span>
+        </li>
+    </ul>
+</summary>
+
+<form class="f-interaction" action="">
+    <input type="text" name="normal-text" id="normal-text" />
+    <input type="number" name="shift" id="shift" value="3" min="3" max="7" />
+
+    <button type="submit" id="send-btn">Cipher</button>
+</form>
+
+<output id="ciphered-text"></output>
+
+<style>
+    .bold-text {
+        font-weight: bold;
+    }
+
+    #ciphered-text {
+        margin-top: 5dvh;
+    }
+</style>
+
+<script>
+    import { Caesar } from "../classes/Caesar";
+
+    const encryptBtn = document.getElementById("encrypt-btn");
+    const decryptBtn = document.getElementById("decrypt-btn");
+    const englishBtn = document.getElementById("english-btn");
+    const spanishBtn = document.getElementById("spanish-btn");
+    const sendBtn = document.getElementById("send-btn");
+    const form = document.querySelector(".f-interaction");
+    const textInput = document.getElementById("normal-text");
+    const shiftInput = document.getElementById("shift");
+    const output = document.getElementById("ciphered-text");
+    const textSummaryAction = document.getElementById("summary-action");
+    const textSummaryLanguage = document.getElementById("summary-language");
+
+    encryptBtn.addEventListener("click", () => {
+        Caesar.setEncryptMode();
+        textSummaryAction.textContent = "Encrypt";
+        sendBtn.textContent = "Cipher";
+    });
+    decryptBtn.addEventListener("click", () => {
+        Caesar.setDecryptMode();
+        textSummaryAction.textContent = "Decrypt";
+        sendBtn.textContent = "Decipher";
+    });
+    englishBtn.addEventListener("click", () => {
+        Caesar.setEnglishVocabulary();
+        textSummaryLanguage.textContent = "English";
+    });
+    spanishBtn.addEventListener("click", () => {
+        Caesar.setSpanishVocabulary();
+        textSummaryLanguage.textContent = "Spanish";
+    });
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const shift = Number(shiftInput.value) || 0;
+        output.textContent = Caesar.cipher(textInput.value, shift);
+    });
+</script>
