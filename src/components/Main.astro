@@ -1,5 +1,5 @@
 ---
-import UserInteraction from "./UserInteraction.astro";
+import CaesarCipher from "./CaesarCipher.astro";
 ---
 
 <main>
@@ -14,7 +14,9 @@ import UserInteraction from "./UserInteraction.astro";
 		</ul>
 	</header>
 
-	<UserInteraction />
+	<div class="caesar">
+		<CaesarCipher />
+	</div>
 </main>
 
 <style>
@@ -28,5 +30,13 @@ import UserInteraction from "./UserInteraction.astro";
 		flex-direction: row;
 		justify-self: center;
 		justify-items: center;
+	}
+
+	.caesar {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: 10dvh 0;
 	}
 </style>
