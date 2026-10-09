@@ -31,12 +31,12 @@ class Caesar {
     ];
     static #spanishABC = Caesar.#englishABC.toSpliced(Caesar.#englishABC.indexOf("n") + 1, 0, "ñ");
     static #encryptMode = true;
-    static #useEnglishVocab = true;
+    static #useEnglishAlphabet = true;
     static #minValue = 3;
     static #maxValue = 7;
 
     static getABC() {
-        return Caesar.#useEnglishVocab ? Caesar.#englishABC : Caesar.#spanishABC;
+        return Caesar.#useEnglishAlphabet ? Caesar.#englishABC : Caesar.#spanishABC;
     }
 
     static setEncryptMode() {
@@ -47,12 +47,12 @@ class Caesar {
         Caesar.#encryptMode = false;
     }
 
-    static setEnglishVocabulary() {
-        Caesar.#useEnglishVocab = true;
+    static setEnglishAlphabet() {
+        Caesar.#useEnglishAlphabet = true;
     }
 
-    static setSpanishVocabulary() {
-        Caesar.#useEnglishVocab = false;
+    static setSpanishAlphabet() {
+        Caesar.#useEnglishAlphabet = false;
     }
 
     /**
