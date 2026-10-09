@@ -3,31 +3,85 @@ import Layout from "../layouts/Layout.astro"
 ---
 
 <Layout title="User Manual">
-	<main class="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center px-6 py-16 text-center">
-		<h1 class="mb-8 text-4xl font-extrabold tracking-tight sm:text-5xl">User Manual</h1>
+	<main class="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center px-6 py-16 text-left">
+		<h1 class="mb-8 text-center text-4xl font-extrabold tracking-tight sm:text-5xl">User Manual</h1>
 
-		<div class="space-y-6 text-base leading-relaxed text-slate-300">
-			<p>
-				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat quo exercitationem, autem
-				corporis quam consectetur sequi magni ut! Unde doloribus doloremque consequuntur possimus
-				blanditiis enim omnis vero maxime ad debitis, libero ut accusantium molestias et error modi
-				velit eum, ex quibusdam, id voluptate! Beatae saepe nobis aspernatur inventore qui aut.
-				Eaque, excepturi ipsum ipsa doloremque nam maiores quisquam vero porro eveniet, a iusto id
-				dolore nemo dicta natus, vel temporibus optio nihil architecto ipsam odio recusandae
-				adipisci culpa. Odio, natus modi. Natus provident debitis, dolorem sapiente eligendi animi
-				asperiores, ullam delectus, quaerat ut error assumenda ex hic maiores doloremque quia?
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis necessitatibus sit
-				nihil quas? Dignissimos cum consequatur laudantium voluptas itaque perferendis unde, alias
-				sint repellendus fuga delectus assumenda, natus necessitatibus hic quo molestias possimus ut
-				accusantium nostrum, sapiente illo reprehenderit tenetur exercitationem? Quas, laudantium!
-				Minus voluptate maiores aspernatur quam, harum eius error. Architecto odit aliquam voluptatum
-				repellat modi natus consequuntur doloremque harum aut, accusantium magni delectus facere quod
-				reiciendis ratione obcaecati tenetur odio. Esse illum molestiae iure facere cum deleniti aut?
-				Eaque necessitatibus modi reprehenderit harum laboriosam sequi impedit deleniti animi,
-				doloribus ea quidem ipsam, voluptates quibusdam quam ducimus magnam.
-			</p>
+		<div class="space-y-8 text-base leading-relaxed text-slate-300">
+			<section class="space-y-3">
+				<p>
+					Welcome to the Caesar Cipher. This tool lets you encrypt or decrypt any message using the
+					classic Caesar cipher. It works by shifting each letter of your text a fixed number of
+					steps along the alphabet.
+				</p>
+			</section>
+
+			<section class="space-y-3">
+				<h2 class="text-2xl font-semibold text-slate-100">How to use it</h2>
+				<ol class="list-decimal space-y-2 pl-6">
+					<li>
+						Choose an <strong class="font-semibold text-slate-100">Action</strong>. Click{" "}
+						<strong class="font-semibold text-slate-100">Encrypt</strong> to hide a message or{" "}
+						<strong class="font-semibold text-slate-100">Decrypt</strong> to reveal one that was
+						ciphered before.
+					</li>
+					<li>
+						Pick a <strong class="font-semibold text-slate-100">Vocabulary</strong>. Use{" "}
+						<strong class="font-semibold text-slate-100">English</strong> or{" "}
+						<strong class="font-semibold text-slate-100">Spanish</strong>. The Spanish alphabet
+						includes the letter <strong class="font-semibold text-slate-100">&ntilde;</strong>, so
+						words with &ntilde; are handled correctly.
+					</li>
+					<li>
+						Write your message in the <strong class="font-semibold text-slate-100">Text to
+						cipher</strong> field.
+					</li>
+					<li>
+						Set the <strong class="font-semibold text-slate-100">Shift</strong> value between{" "}
+						<strong class="font-semibold text-slate-100">3</strong> and{" "}
+						<strong class="font-semibold text-slate-100">7</strong>. This is the number of steps
+						each letter will move.
+					</li>
+					<li>
+						Press the <strong class="font-semibold text-slate-100">Cipher</strong> button. The
+						button label changes to <strong class="font-semibold text-slate-100">Decipher</strong>{" "}
+						when Decrypt mode is active.
+					</li>
+					<li>
+						The result will appear in the <strong class="font-semibold text-slate-100">Result</strong>{" "}
+						field below.
+					</li>
+				</ol>
+			</section>
+
+			<section class="space-y-3">
+				<h2 class="text-2xl font-semibold text-slate-100">A quick example</h2>
+				<p>
+					With <strong class="font-semibold text-slate-100">Encrypt</strong> mode, the{" "}
+					<strong class="font-semibold text-slate-100">English</strong> vocabulary and a shift of{" "}
+					<strong class="font-semibold text-slate-100">3</strong>, typing{" "}
+					<span class="text-slate-100">hello</span> produces{" "}
+					<span class="text-slate-100">khoor</span>. Switch to{" "}
+					<strong class="font-semibold text-slate-100">Decrypt</strong> mode, type{" "}
+					<span class="text-slate-100">khoor</span> with the same shift, and you get{" "}
+					<span class="text-slate-100">hello</span> back.
+				</p>
+			</section>
+
+			<section class="space-y-3">
+				<h2 class="text-2xl font-semibold text-slate-100">Things to keep in mind</h2>
+				<ul class="list-disc space-y-2 pl-6">
+					<li>
+						Characters that are not letters (spaces, numbers, punctuation) are kept unchanged.
+					</li>
+					<li>
+						Uppercase and lowercase letters are preserved after ciphering.
+					</li>
+					<li>
+						The same shift value must be used to encrypt and then decrypt a message, otherwise the
+						result will not match the original.
+					</li>
+				</ul>
+			</section>
 		</div>
 
 		<a
