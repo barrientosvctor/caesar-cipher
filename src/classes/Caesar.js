@@ -62,7 +62,7 @@ class Caesar {
      * @returns Text encrypted or decrypted.
      */
     static cipher(text, shift) {
-        if (shift > Caesar.#maxValue || shift < Caesar.#minValue) {
+        if (shift > Caesar.#maxValue || shift < Caesar.#minValue || text.length === 0) {
             return "";
         }
 
