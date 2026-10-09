@@ -20,6 +20,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# Vitest reports and artifacts
+.vitest/
+
 # jetbrains setting folder
 .idea/
 
