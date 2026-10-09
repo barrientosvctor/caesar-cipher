@@ -1,82 +1,176 @@
-<div class="cipher-options">
-    <button id="encrypt-btn">Encrypt</button>
-    <button id="decrypt-btn">Decrypt</button>
+<div id="cipher-card" class="mx-auto w-full max-w-2xl rounded-3xl border border-white/10 bg-white/5 shadow-xl shadow-slate-950/50 sm:p-10 p-6">
+	<div class="mb-8 grid gap-6 sm:grid-cols-2">
+		<fieldset>
+			<legend class="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-400">
+				Action
+			</legend>
+			<div class="inline-flex w-full rounded-xl border border-white/10 bg-black/20 p-1">
+				<button
+					id="encrypt-btn"
+					class="mode-btn flex-1 rounded-lg bg-indigo-500 px-4 py-2 text-sm font-medium text-white transition-colors"
+				>
+					Encrypt
+				</button>
+				<button
+					id="decrypt-btn"
+					class="mode-btn flex-1 rounded-lg bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:text-white"
+				>
+					Decrypt
+				</button>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend class="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-400">
+				Alphabet
+			</legend>
+			<div class="inline-flex w-full rounded-xl border border-white/10 bg-black/20 p-1">
+				<button
+					id="english-btn"
+					class="lang-btn flex-1 rounded-lg bg-indigo-500 px-4 py-2 text-sm font-medium text-white transition-colors"
+				>
+					English
+				</button>
+				<button
+					id="spanish-btn"
+					class="lang-btn flex-1 rounded-lg bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:text-white"
+				>
+					Spanish
+				</button>
+			</div>
+		</fieldset>
+	</div>
+
+	<div class="mb-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 rounded-xl border border-white/10 bg-black/20 px-10 py-3 text-sm">
+		<p>
+			<span class="font-semibold text-slate-200">Action mode: </span>
+			<span id="summary-action" class="text-indigo-300">Encrypt</span>
+		</p>
+		<p>
+			<span class="font-semibold text-slate-200">Language selected: </span>
+			<span id="summary-language" class="text-indigo-300">English</span>
+		</p>
+	</div>
+
+	<form class="f-interaction space-y-5" action="">
+		<div class="grid gap-5 sm:grid-cols-3">
+			<div class="sm:col-span-2">
+				<label for="normal-text" class="mb-2 block text-sm font-medium text-slate-300">
+					Text to cipher
+				</label>
+				<input
+					type="text"
+					name="normal-text"
+					id="normal-text"
+					placeholder="Write your message here..."
+					class="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white transition outline-none placeholder:text-slate-500 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/40"
+					required
+				/>
+			</div>
+
+			<div>
+				<label for="shift" class="mb-2 block text-sm font-medium text-slate-300">
+					Shift (3 - 7)
+				</label>
+				<input
+					type="number"
+					name="shift"
+					id="shift"
+					value="3"
+					min="3"
+					max="7"
+					class="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white transition outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/40"
+					required
+				/>
+			</div>
+		</div>
+
+		<button
+			type="submit"
+			id="send-btn"
+			class="w-full rounded-xl bg-indigo-500 px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300"
+		>
+			Cipher
+		</button>
+	</form>
+
+	<div class="mt-6">
+		<label for="ciphered-text" class="mb-2 block text-sm font-medium text-slate-300">
+			Result
+		</label>
+		<output
+			id="ciphered-text"
+			class="block min-h-24 w-full rounded-2xl border border-dashed border-white/15 bg-black/30 p-4 wrap-break-word text-lg text-emerald-300"
+		></output>
+	</div>
 </div>
-
-<div class="language-options">
-    <button id="english-btn">English vocabulary</button>
-    <button id="spanish-btn">Spanish vocabulary</button>
-</div>
-
-<summary>
-    <ul>
-        <li>
-            <span class="bold-text">Action mode: </span>
-            <span id="summary-action">Encrypt</span>
-        </li>
-        <li>
-            <span class="bold-text">Language selected: </span>
-            <span id="summary-language">English</span>
-        </li>
-    </ul>
-</summary>
-
-<form class="f-interaction" action="">
-    <input type="text" name="normal-text" id="normal-text" />
-    <input type="number" name="shift" id="shift" value="3" min="3" max="7" />
-
-    <button type="submit" id="send-btn">Cipher</button>
-</form>
-
-<output id="ciphered-text"></output>
-
-<style>
-    .bold-text {
-        font-weight: bold;
-    }
-
-    #ciphered-text {
-        margin-top: 5dvh;
-    }
-</style>
 
 <script>
-    import { Caesar } from "../classes/Caesar";
+	import { Caesar } from "../classes/Caesar";
 
-    const encryptBtn = document.getElementById("encrypt-btn");
-    const decryptBtn = document.getElementById("decrypt-btn");
-    const englishBtn = document.getElementById("english-btn");
-    const spanishBtn = document.getElementById("spanish-btn");
-    const sendBtn = document.getElementById("send-btn");
-    const form = document.querySelector(".f-interaction");
-    const textInput = document.getElementById("normal-text");
-    const shiftInput = document.getElementById("shift");
-    const output = document.getElementById("ciphered-text");
-    const textSummaryAction = document.getElementById("summary-action");
-    const textSummaryLanguage = document.getElementById("summary-language");
+	const encryptBtn = document.getElementById("encrypt-btn");
+	const decryptBtn = document.getElementById("decrypt-btn");
+	const englishBtn = document.getElementById("english-btn");
+	const spanishBtn = document.getElementById("spanish-btn");
+	const sendBtn = document.getElementById("send-btn");
+	const form = document.querySelector(".f-interaction");
+	const textInput = document.getElementById("normal-text") as HTMLInputElement;
+	const shiftInput = document.getElementById("shift") as HTMLInputElement;
+	const output = document.getElementById("ciphered-text");
+	const textSummaryAction = document.getElementById("summary-action");
+	const textSummaryLanguage = document.getElementById("summary-language");
 
-    encryptBtn.addEventListener("click", () => {
-        Caesar.setEncryptMode();
-        textSummaryAction.textContent = "Encrypt";
-        sendBtn.textContent = "Cipher";
-    });
-    decryptBtn.addEventListener("click", () => {
-        Caesar.setDecryptMode();
-        textSummaryAction.textContent = "Decrypt";
-        sendBtn.textContent = "Decipher";
-    });
-    englishBtn.addEventListener("click", () => {
-        Caesar.setEnglishVocabulary();
-        textSummaryLanguage.textContent = "English";
-    });
-    spanishBtn.addEventListener("click", () => {
-        Caesar.setSpanishVocabulary();
-        textSummaryLanguage.textContent = "Spanish";
-    });
+	const activeClasses = ["bg-indigo-500", "text-white"];
+	const inactiveClasses = ["bg-white/5", "text-slate-300", "hover:text-white"];
 
-    form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const shift = Number(shiftInput.value) || 0;
-        output.textContent = Caesar.cipher(textInput.value, shift);
-    });
+	const setActiveButton = (buttons: HTMLElement[], activeButton: HTMLElement) => {
+		buttons.forEach((button) => {
+			if (button === activeButton) {
+				button.classList.remove(...inactiveClasses);
+				button.classList.add(...activeClasses);
+			} else {
+				button.classList.remove(...activeClasses);
+				button.classList.add(...inactiveClasses);
+			}
+		});
+	}
+
+	if (encryptBtn && decryptBtn && sendBtn && textSummaryAction) {
+		encryptBtn.addEventListener("click", () => {
+			Caesar.setEncryptMode();
+			setActiveButton([encryptBtn, decryptBtn], encryptBtn);
+			textSummaryAction.textContent = "Encrypt";
+			sendBtn.textContent = "Cipher";
+		});
+
+		decryptBtn.addEventListener("click", () => {
+			Caesar.setDecryptMode();
+			setActiveButton([encryptBtn, decryptBtn], decryptBtn);
+			textSummaryAction.textContent = "Decrypt";
+			sendBtn.textContent = "Decipher";
+		});
+	}
+
+	if (englishBtn && spanishBtn && textSummaryLanguage) {
+		englishBtn.addEventListener("click", () => {
+			Caesar.setEnglishAlphabet();
+			setActiveButton([englishBtn, spanishBtn], englishBtn);
+			textSummaryLanguage.textContent = "English";
+		});
+
+		spanishBtn.addEventListener("click", () => {
+			Caesar.setSpanishAlphabet();
+			setActiveButton([englishBtn, spanishBtn], spanishBtn);
+			textSummaryLanguage.textContent = "Spanish";
+		});
+	}
+
+	form?.addEventListener("submit", (event) => {
+		event.preventDefault();
+		const shift = Number(shiftInput?.value) || 0;
+		
+		if (output) {
+			output.textContent = Caesar.cipher(textInput.value, shift);
+		}
+	});
 </script>

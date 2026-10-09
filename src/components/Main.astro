@@ -2,41 +2,45 @@
 import CaesarCipher from "./CaesarCipher.astro";
 ---
 
-<main>
-	<header class="h-options">
-		<ul>
-			<li>
-				<a href="/manual">User Manual</a>
-			</li>
-			<li>
-				<a href="https://github.com/barrientosvctor" target="_blank">GitHub</a>
-			</li>
-		</ul>
+<main class="flex flex-1 flex-col">
+	<header class="mx-auto w-full max-w-6xl px-6 py-6">
+		<nav>
+			<ul class="flex items-center justify-between text-sm font-medium text-slate-300">
+				<li>
+					<a
+						href="#"
+						target="_blank"
+						rel="external"
+						class="transition hover:text-white"
+					>Technical Report</a>
+				</li>
+				<li>
+					<a href="/manual" class="transition hover:text-white">User Manual</a>
+				</li>
+				<li>
+					<a
+						href="https://github.com/barrientosvctor"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="transition hover:text-white"
+					>
+						GitHub
+					</a>
+				</li>
+			</ul>
+		</nav>
 	</header>
 
-	<div class="caesar">
+	<section class="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-6 py-10 sm:py-16">
+		<div class="mb-10 space-y-2 text-center">
+			<h1 class="text-3xl font-semibold tracking-tight text-slate-100 sm:text-4xl">
+				Caesar Cipher
+			</h1>
+			<p class="mx-auto max-w-md text-sm text-slate-400">
+				Encrypt and decrypt messages in English or Spanish.
+			</p>
+		</div>
+
 		<CaesarCipher />
-	</div>
+	</section>
 </main>
-
-<style>
-	* {
-        margin: 0;
-        padding: 0;
-    }
-
-	.h-options {
-		display: flex;
-		flex-direction: row;
-		justify-self: center;
-		justify-items: center;
-	}
-
-	.caesar {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		margin: 10dvh 0;
-	}
-</style>

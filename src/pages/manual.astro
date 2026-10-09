@@ -3,23 +3,38 @@ import Layout from "../layouts/Layout.astro"
 ---
 
 <Layout title="User Manual">
-    <main>
-        <h1>User Manual</h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat quo exercitationem, autem corporis quam consectetur sequi magni ut! Unde doloribus doloremque consequuntur possimus blanditiis enim omnis vero maxime ad debitis, libero ut accusantium molestias et error modi velit eum, ex quibusdam, id voluptate! Beatae saepe nobis aspernatur inventore qui aut. Eaque, excepturi ipsum ipsa doloremque nam maiores quisquam vero porro eveniet, a iusto id dolore nemo dicta natus, vel temporibus optio nihil architecto ipsam odio recusandae adipisci culpa. Odio, natus modi. Natus provident debitis, dolorem sapiente eligendi animi asperiores, ullam delectus, quaerat ut error assumenda ex hic maiores doloremque quia?</p>
-        <br />
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis necessitatibus sit nihil quas? Dignissimos cum consequatur laudantium voluptas itaque perferendis unde, alias sint repellendus fuga delectus assumenda, natus necessitatibus hic quo molestias possimus ut accusantium nostrum, sapiente illo reprehenderit tenetur exercitationem? Quas, laudantium! Minus voluptate maiores aspernatur quam, harum eius error. Architecto odit aliquam voluptatum repellat modi natus consequuntur doloremque harum aut, accusantium magni delectus facere quod reiciendis ratione obcaecati tenetur odio. Esse illum molestiae iure facere cum deleniti aut? Eaque necessitatibus modi reprehenderit harum laboriosam sequi impedit deleniti animi, doloribus ea quidem ipsam, voluptates quibusdam quam ducimus magnam.</p>        
-        <br />
-        <button>
-            <a href="/">Go to main page.</a>
-        </button>
-    </main>
-</Layout>
+	<main class="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center px-6 py-16 text-center">
+		<h1 class="mb-8 text-4xl font-extrabold tracking-tight sm:text-5xl">User Manual</h1>
 
-<style>
-    main {
-        padding: 0 10dvh;
-        align-items: center;
-        align-self: center;
-        text-align: center;
-    }
-</style>
+		<div class="space-y-6 text-base leading-relaxed text-slate-300">
+			<p>
+				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat quo exercitationem, autem
+				corporis quam consectetur sequi magni ut! Unde doloribus doloremque consequuntur possimus
+				blanditiis enim omnis vero maxime ad debitis, libero ut accusantium molestias et error modi
+				velit eum, ex quibusdam, id voluptate! Beatae saepe nobis aspernatur inventore qui aut.
+				Eaque, excepturi ipsum ipsa doloremque nam maiores quisquam vero porro eveniet, a iusto id
+				dolore nemo dicta natus, vel temporibus optio nihil architecto ipsam odio recusandae
+				adipisci culpa. Odio, natus modi. Natus provident debitis, dolorem sapiente eligendi animi
+				asperiores, ullam delectus, quaerat ut error assumenda ex hic maiores doloremque quia?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis necessitatibus sit
+				nihil quas? Dignissimos cum consequatur laudantium voluptas itaque perferendis unde, alias
+				sint repellendus fuga delectus assumenda, natus necessitatibus hic quo molestias possimus ut
+				accusantium nostrum, sapiente illo reprehenderit tenetur exercitationem? Quas, laudantium!
+				Minus voluptate maiores aspernatur quam, harum eius error. Architecto odit aliquam voluptatum
+				repellat modi natus consequuntur doloremque harum aut, accusantium magni delectus facere quod
+				reiciendis ratione obcaecati tenetur odio. Esse illum molestiae iure facere cum deleniti aut?
+				Eaque necessitatibus modi reprehenderit harum laboriosam sequi impedit deleniti animi,
+				doloribus ea quidem ipsam, voluptates quibusdam quam ducimus magnam.
+			</p>
+		</div>
+
+		<a
+			href="/"
+			class="mt-10 inline-flex items-center justify-center rounded-xl bg-indigo-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300"
+		>
+			Go to main page
+		</a>
+	</main>
+</Layout>
