@@ -69,14 +69,14 @@ class Caesar {
         const abc = Caesar.getABC();
         const n = abc.length;
         const direction = Caesar.#encryptMode ? 1 : -1;
-        const k = ((shift % n) + n) % n;
+        const k = (((shift * direction) % n) + n) % n;
 
         return [...text]
             .map((ch) => {
                 const lower = ch.toLowerCase();
                 const index = abc.indexOf(lower);
                 if (index === -1) return ch;
-                const newIndex = (index + direction * k) % n;
+                const newIndex = (index + k) % n;
                 const mapped = abc[newIndex];
                 return ch === lower ? mapped : mapped.toUpperCase();
             })
