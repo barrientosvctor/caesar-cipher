@@ -3,7 +3,7 @@ import { describe, test, expect, beforeEach } from "vitest";
 
 beforeEach(() => {
     Caesar.setEncryptMode();
-    Caesar.setEnglishVocabulary();
+    Caesar.setEnglishAlphabet();
 });
 
 describe("Ceasar mode setters", () => {
@@ -24,13 +24,13 @@ describe("Ceasar mode setters", () => {
     });
 
     test("setSpanishVocabulary uses the Spanish alphabet", () => {
-        Caesar.setSpanishVocabulary();
+        Caesar.setSpanishAlphabet();
         expect(Caesar.cipher("n", 3)).toBe("p");
     });
 
     test("setEnglishVocabulary after setSpanishVocabulary uses English again", () => {
-        Caesar.setSpanishVocabulary();
-        Caesar.setEnglishVocabulary();
+        Caesar.setSpanishAlphabet();
+        Caesar.setEnglishAlphabet();
         expect(Caesar.cipher("abc", 3)).toBe("def");
     });
 });
@@ -78,18 +78,18 @@ describe("Caesar.cipher decryption", () => {
 
 describe("Caesar.cipher Spanish vocabulary", () => {
     test("includes the ñ character and treats it as a regular letter", () => {
-        Caesar.setSpanishVocabulary();
+        Caesar.setSpanishAlphabet();
         expect(Caesar.cipher("ñ", 3)).toBe("q");
     });
 
     test("wraps before the a of the Spanish alphabet", () => {
         Caesar.setDecryptMode();
-        Caesar.setSpanishVocabulary();
+        Caesar.setSpanishAlphabet();
         expect(Caesar.cipher("a", 3)).toBe("x");
     });
 
     test("round-trips Spanish text", () => {
-        Caesar.setSpanishVocabulary();
+        Caesar.setSpanishAlphabet();
         const encrypted = Caesar.cipher("Hola ñoño 123!", 4);
         Caesar.setDecryptMode();
         expect(Caesar.cipher(encrypted, 4)).toBe("Hola ñoño 123!");
