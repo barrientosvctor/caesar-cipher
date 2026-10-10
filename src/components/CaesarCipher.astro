@@ -1,5 +1,11 @@
 ---
 const COPY_BUTTON_TEXT = "Copy result" as const;
+const CIPHER_LABEL_TEXT = "Ciphertext" as const;
+const DECIPHER_LABEL_TEXT = "Plaintext" as const;
+const CIPHER_ACTION_TEXT = "Encrypt" as const;
+const DECIPHER_ACTION_TEXT = "Decrypt" as const;
+const ENGLISH_LANGUAGE_TEXT = "English" as const;
+const SPANISH_LANGUAGE_TEXT = "Spanish" as const;
 ---
 
 <div id="cipher-card" class="mx-auto w-full max-w-2xl rounded-3xl border border-white/10 bg-white/5 shadow-xl shadow-slate-950/50 sm:p-10 p-6">
@@ -11,15 +17,17 @@ const COPY_BUTTON_TEXT = "Copy result" as const;
 			<div class="inline-flex w-full rounded-xl border border-white/10 bg-black/20 p-1">
 				<button
 					id="encrypt-btn"
-					class="mode-btn flex-1 rounded-lg bg-indigo-500 px-4 py-2 text-sm font-medium text-white transition-colors"
+					class="mode-btn flex-1 rounded-lg bg-indigo-500/30 px-4 py-2 text-sm font-medium text-white transition-colors"
+					data-action-text={CIPHER_ACTION_TEXT}
 				>
-					Encrypt
+					{CIPHER_ACTION_TEXT}
 				</button>
 				<button
 					id="decrypt-btn"
 					class="mode-btn flex-1 rounded-lg bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:text-white"
+					data-action-text={DECIPHER_ACTION_TEXT}
 				>
-					Decrypt
+					{DECIPHER_ACTION_TEXT}
 				</button>
 			</div>
 		</fieldset>
@@ -31,15 +39,17 @@ const COPY_BUTTON_TEXT = "Copy result" as const;
 			<div class="inline-flex w-full rounded-xl border border-white/10 bg-black/20 p-1">
 				<button
 					id="english-btn"
-					class="lang-btn flex-1 rounded-lg bg-indigo-500 px-4 py-2 text-sm font-medium text-white transition-colors"
+					class="lang-btn flex-1 rounded-lg bg-indigo-500/30 px-4 py-2 text-sm font-medium text-white transition-colors"
+					data-language={ENGLISH_LANGUAGE_TEXT}
 				>
-					English
+					{ENGLISH_LANGUAGE_TEXT}
 				</button>
 				<button
 					id="spanish-btn"
 					class="lang-btn flex-1 rounded-lg bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:text-white"
+					data-language={SPANISH_LANGUAGE_TEXT}
 				>
-					Spanish
+					{SPANISH_LANGUAGE_TEXT}
 				</button>
 			</div>
 		</fieldset>
@@ -48,11 +58,11 @@ const COPY_BUTTON_TEXT = "Copy result" as const;
 	<div class="mb-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 rounded-xl border border-white/10 bg-black/20 px-10 py-3 text-sm">
 		<p>
 			<span class="font-semibold text-slate-200">Action mode: </span>
-			<span id="summary-action" class="text-indigo-300">Encrypt</span>
+			<span id="summary-action" class="text-indigo-300">{CIPHER_ACTION_TEXT}</span>
 		</p>
 		<p>
 			<span class="font-semibold text-slate-200">Language selected: </span>
-			<span id="summary-language" class="text-indigo-300">English</span>
+			<span id="summary-language" class="text-indigo-300">{ENGLISH_LANGUAGE_TEXT}</span>
 		</p>
 	</div>
 
@@ -60,7 +70,7 @@ const COPY_BUTTON_TEXT = "Copy result" as const;
 		<div class="grid gap-5 sm:grid-cols-3">
 			<div class="sm:col-span-2">
 				<label for="normal-text" class="mb-2 block text-sm font-medium text-slate-300">
-					Text to cipher
+					Text to <span id="label-selected-action">{CIPHER_ACTION_TEXT.toLowerCase()}</span>
 				</label>
 				<input
 					type="text"
@@ -92,15 +102,15 @@ const COPY_BUTTON_TEXT = "Copy result" as const;
 		<button
 			type="submit"
 			id="send-btn"
-			class="w-full rounded-xl bg-indigo-500 px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300"
+			class="w-full rounded-xl bg-indigo-500 px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300 hover:shadow-amber-300/20 hover:shadow-xl/50"
 		>
-			Cipher
+			{CIPHER_ACTION_TEXT}
 		</button>
 	</form>
 
 	<div class="mt-6">
-		<label for="ciphered-text" class="mb-2 block text-sm font-medium text-slate-300">
-			Result
+		<label id="label-result" for="ciphered-text" class="mb-2 block text-sm font-medium text-slate-300" data-label-cipher={CIPHER_LABEL_TEXT} data-label-decipher={DECIPHER_LABEL_TEXT}>
+			{CIPHER_LABEL_TEXT}
 		</label>
 		<output
 			id="ciphered-text"
@@ -132,10 +142,12 @@ const COPY_BUTTON_TEXT = "Copy result" as const;
 	const textSummaryAction = document.getElementById("summary-action");
 	const textSummaryLanguage = document.getElementById("summary-language");
 	const copyBtn = document.getElementById("copy-btn");
+	const resultLabel = document.getElementById("label-result") as HTMLLabelElement;
+	const selectedActionLabel = document.getElementById("label-selected-action") as HTMLSpanElement;
 
 	let copyButtonShown = false;
 
-	const activeClasses = ["bg-indigo-500", "text-white"];
+	const activeClasses = ["bg-indigo-500/30", "text-white"];
 	const inactiveClasses = ["bg-white/5", "text-slate-300", "hover:text-white"];
 	const normalButtonClasses = ["border-white/10", "bg-white/5"];
 	const successButtonClasses = ["border-green-400/75", "bg-green-900/75"];
@@ -153,19 +165,23 @@ const COPY_BUTTON_TEXT = "Copy result" as const;
 		});
 	}
 
-	if (encryptBtn && decryptBtn && sendBtn && textSummaryAction) {
+	if (encryptBtn && decryptBtn && sendBtn && textSummaryAction && resultLabel && selectedActionLabel) {
 		encryptBtn.addEventListener("click", () => {
 			Caesar.setEncryptMode();
 			setActiveButton([encryptBtn, decryptBtn], encryptBtn);
-			textSummaryAction.textContent = "Encrypt";
-			sendBtn.textContent = "Cipher";
+			textSummaryAction.textContent = encryptBtn.dataset.actionText!;
+			sendBtn.textContent = encryptBtn.dataset.actionText!;
+			selectedActionLabel.textContent = encryptBtn.dataset.actionText!.toLowerCase();
+			resultLabel.textContent = resultLabel.dataset.labelCipher!;
 		});
-
+		
 		decryptBtn.addEventListener("click", () => {
 			Caesar.setDecryptMode();
 			setActiveButton([encryptBtn, decryptBtn], decryptBtn);
-			textSummaryAction.textContent = "Decrypt";
-			sendBtn.textContent = "Decipher";
+			textSummaryAction.textContent = decryptBtn.dataset.actionText!;
+			sendBtn.textContent = decryptBtn.dataset.actionText!;
+			selectedActionLabel.textContent = decryptBtn.dataset.actionText!.toLowerCase();
+			resultLabel.textContent = resultLabel.dataset.labelDecipher!;
 		});
 	}
 
@@ -173,13 +189,13 @@ const COPY_BUTTON_TEXT = "Copy result" as const;
 		englishBtn.addEventListener("click", () => {
 			Caesar.setEnglishAlphabet();
 			setActiveButton([englishBtn, spanishBtn], englishBtn);
-			textSummaryLanguage.textContent = "English";
+			textSummaryLanguage.textContent = englishBtn.dataset.language!;
 		});
 
 		spanishBtn.addEventListener("click", () => {
 			Caesar.setSpanishAlphabet();
 			setActiveButton([englishBtn, spanishBtn], spanishBtn);
-			textSummaryLanguage.textContent = "Spanish";
+			textSummaryLanguage.textContent = spanishBtn.dataset.language!;
 		});
 	}
 
