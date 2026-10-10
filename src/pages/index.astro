@@ -1,8 +1,42 @@
 ---
 import Main from "../components/Main.astro";
 import Layout from "../layouts/Layout.astro";
+
+const title = "Caesar Cipher - Encrypt and Decrypt Text Online";
+const description =
+	"Free online Caesar cipher tool to encrypt and decrypt text using the English or Spanish alphabet with a shift from 3 to 7.";
+const keywords =
+	"caesar cipher, caesar cipher online, encrypt text, decrypt text, encryption tool, cipher, spanish alphabet, english alphabet";
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@type": "WebApplication",
+	name: "Caesar Cipher",
+	description,
+	url: Astro.url.href,
+	applicationCategory: "UtilitiesApplication",
+	operatingSystem: "Any",
+	browserRequirements: "Requires JavaScript",
+	inLanguage: "en",
+	offers: {
+		"@type": "Offer",
+		price: "0",
+		priceCurrency: "USD",
+	},
+	author: {
+		"@type": "Person",
+		name: "Victor Barrientos",
+		url: "https://github.com/barrientosvctor",
+	},
+};
 ---
 
-<Layout title="Caesar Cipher">
+<Layout
+	title={title}
+	description={description}
+	keywords={keywords}
+	type="website"
+	structuredData={structuredData}
+>
 	<Main />
 </Layout>

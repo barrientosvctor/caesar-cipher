@@ -2,9 +2,9 @@
 import CaesarCipher from "./CaesarCipher.astro";
 ---
 
-<main class="flex flex-1 flex-col">
+<main id="main-content" class="flex flex-1 flex-col">
 	<header class="mx-auto w-full max-w-6xl px-6 py-6">
-		<nav>
+		<nav aria-label="Primary navigation">
 			<ul class="flex items-center justify-between text-sm font-medium text-slate-300">
 				<li>
 					<a
@@ -31,9 +31,9 @@ import CaesarCipher from "./CaesarCipher.astro";
 		</nav>
 	</header>
 
-	<section class="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-6 py-10 sm:py-16">
+	<section class="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-6 py-10 sm:py-16" aria-labelledby="page-title">
 		<div class="mb-10 space-y-2 text-center">
-			<h1 class="text-3xl font-semibold tracking-tight text-slate-100 sm:text-4xl">
+			<h1 id="page-title" class="text-3xl font-semibold tracking-tight text-slate-100 sm:text-4xl">
 				Caesar Cipher
 			</h1>
 			<p class="mx-auto max-w-md text-sm text-slate-400">

@@ -1,11 +1,52 @@
 ---
 import { CIPHER_ACTION_TEXT, DECIPHER_ACTION_TEXT } from "../constants/text";
 import Layout from "../layouts/Layout.astro";
+
+const title = "User Manual - How to Use the Caesar Cipher";
+const description =
+	"Step-by-step guide to encrypt and decrypt text with the Caesar Cipher web app: choose an action and vocabulary, enter your message, set the shift value, and read the result.";
+const keywords =
+	"caesar cipher manual, how to use caesar cipher, encryption guide, decryption guide, shift value, encrypted text";
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@type": "HowTo",
+	name: "How to use the Caesar Cipher",
+	description,
+	inLanguage: "en",
+	step: [
+		{
+			"@type": "HowToStep",
+			name: "Choose an action",
+			text: `Click ${CIPHER_ACTION_TEXT} to hide a message or ${DECIPHER_ACTION_TEXT} to reveal one that was ciphered before.`,
+		},
+		{
+			"@type": "HowToStep",
+			name: "Pick a vocabulary",
+			text: "Use the English or Spanish alphabet. The Spanish alphabet includes the letter ñ.",
+		},
+		{
+			"@type": "HowToStep",
+			name: "Write your message",
+			text: "Type your message in the text field.",
+		},
+		{
+			"@type": "HowToStep",
+			name: "Set the shift value",
+			text: "Choose a shift value between 3 and 7, the number of steps each letter will move.",
+		},
+		{
+			"@type": "HowToStep",
+			name: "Cipher the text",
+			text: "Press the button and read the result in the field below.",
+		},
+	],
+};
 ---
 
-<Layout title="User Manual">
-	<main class="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center px-6 py-16 text-left">
-		<h1 class="mb-8 text-center text-4xl font-extrabold tracking-tight sm:text-5xl">User Manual</h1>
+<Layout title={title} description={description} keywords={keywords} type="article" structuredData={structuredData}>
+	<main id="main-content" class="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center px-6 py-16 text-left" aria-labelledby="page-title">
+		<h1 id="page-title" class="mb-8 text-center text-4xl font-extrabold tracking-tight sm:text-5xl">User Manual</h1>
 
 		<div class="space-y-8 text-base leading-relaxed text-slate-300">
 			<section class="space-y-3">

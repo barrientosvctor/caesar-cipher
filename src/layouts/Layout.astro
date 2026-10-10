@@ -1,19 +1,55 @@
 ---
 import "../styles/global.css";
-const { title } = Astro.props;
+
+const {
+	title,
+	description = "Encrypt and decrypt messages with the Caesar cipher using English or Spanish alphabets.",
+	keywords,
+	type = "website",
+	structuredData,
+} = Astro.props;
+
+const canonicalURL = Astro.url.href;
 ---
 
 <!doctype html>
 <html lang="en" class="h-full bg-slate-950">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
+
 		<title>{title}</title>
+		<meta name="description" content={description} />
+		{keywords && <meta name="keywords" content={keywords} />}
+		<meta name="author" content="Victor Barrientos" />
+		<meta name="robots" content="index, follow" />
+		<meta name="theme-color" content="#020617" />
+		<link rel="canonical" href={canonicalURL} />
+
+		<meta property="og:type" content={type} />
+		<meta property="og:site_name" content="Caesar Cipher" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:locale" content="en_US" />
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+
+		{structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
 	</head>
 	<body class="h-full text-slate-100 antialiased">
+		<a
+			href="#main-content"
+			class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-xl focus:bg-indigo-500 focus:px-4 focus:py-2 focus:font-semibold focus:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300"
+		>
+			Skip to content
+		</a>
+
 		<div class="relative flex min-h-full flex-col">
 			<slot />
 
