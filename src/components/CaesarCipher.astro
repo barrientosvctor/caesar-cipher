@@ -1,3 +1,7 @@
+---
+const COPY_BUTTON_TEXT = "Copy result" as const;
+---
+
 <div id="cipher-card" class="mx-auto w-full max-w-2xl rounded-3xl border border-white/10 bg-white/5 shadow-xl shadow-slate-950/50 sm:p-10 p-6">
 	<div class="mb-8 grid gap-6 sm:grid-cols-2">
 		<fieldset>
@@ -102,6 +106,14 @@
 			id="ciphered-text"
 			class="block min-h-24 w-full rounded-2xl border border-dashed border-white/15 bg-black/30 p-4 wrap-break-word text-lg text-emerald-300"
 		></output>
+		<button
+			id="copy-btn"
+			type="button"
+			class="mt-3 hidden items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:border-white/20 hover:text-white"
+			data-label={COPY_BUTTON_TEXT}
+		>
+			{COPY_BUTTON_TEXT}
+		</button>
 	</div>
 </div>
 
@@ -119,9 +131,15 @@
 	const output = document.getElementById("ciphered-text");
 	const textSummaryAction = document.getElementById("summary-action");
 	const textSummaryLanguage = document.getElementById("summary-language");
+	const copyBtn = document.getElementById("copy-btn");
+
+	let copyButtonShown = false;
 
 	const activeClasses = ["bg-indigo-500", "text-white"];
 	const inactiveClasses = ["bg-white/5", "text-slate-300", "hover:text-white"];
+	const normalButtonClasses = ["border-white/10", "bg-white/5"];
+	const successButtonClasses = ["border-green-400/75", "bg-green-900/75"];
+	const errorButtonClasses = ["border-red-400/75", "bg-red-900/40"];
 
 	const setActiveButton = (buttons: HTMLElement[], activeButton: HTMLElement) => {
 		buttons.forEach((button) => {
@@ -168,9 +186,43 @@
 	form?.addEventListener("submit", (event) => {
 		event.preventDefault();
 		const shift = Number(shiftInput?.value) || 0;
-		
+
 		if (output) {
 			output.textContent = Caesar.cipher(textInput.value, shift);
+
+			if (!copyButtonShown && textInput.value.trim() !== "" && output.textContent.trim() !== "") {
+				copyBtn?.classList.remove("hidden");
+				copyBtn?.classList.add("inline-flex");
+				copyButtonShown = true;
+			}
 		}
 	});
+
+	if (copyBtn) {
+		copyBtn.addEventListener("click", async () => {
+			if (output) {
+				let success = false;
+				copyBtn.classList.remove(...normalButtonClasses);
+				try {
+					await navigator.clipboard.writeText(output.textContent);
+					copyBtn.classList.add(...successButtonClasses);
+					copyBtn.textContent = "Copied!";
+					success = true;
+				} catch (err) {
+					copyBtn.classList.add(...errorButtonClasses);
+					copyBtn.textContent = "Not copied!";
+				} finally {
+					setTimeout(() => {
+						copyBtn.textContent = copyBtn.dataset.label!;
+						if (success) {
+							copyBtn.classList.remove(...successButtonClasses);
+						} else {
+							copyBtn.classList.remove(...errorButtonClasses);
+						}
+						copyBtn.classList.add(...normalButtonClasses);
+					}, 1500);
+				}
+			}
+		});
+	}
 </script>
