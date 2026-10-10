@@ -1,5 +1,6 @@
 ---
-import Layout from "../layouts/Layout.astro"
+import { CIPHER_ACTION_TEXT, DECIPHER_ACTION_TEXT } from "../constants/text";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="User Manual">
@@ -9,7 +10,7 @@ import Layout from "../layouts/Layout.astro"
 		<div class="space-y-8 text-base leading-relaxed text-slate-300">
 			<section class="space-y-3">
 				<p>
-					Welcome to the Caesar Cipher. This tool lets you encrypt or decrypt any message using the
+					Welcome to this demo of Caesar Cipher algorithm. This tool lets you encrypt or decrypt any message using the
 					classic Caesar cipher. It works by shifting each letter of your text a fixed number of
 					steps along the alphabet.
 				</p>
@@ -20,8 +21,8 @@ import Layout from "../layouts/Layout.astro"
 				<ol class="list-decimal space-y-2 pl-6">
 					<li>
 						Choose an <strong class="font-semibold text-slate-100">Action</strong>. Click{" "}
-						<strong class="font-semibold text-slate-100">Encrypt</strong> to hide a message or{" "}
-						<strong class="font-semibold text-slate-100">Decrypt</strong> to reveal one that was
+						<strong class="font-semibold text-slate-100">{CIPHER_ACTION_TEXT}</strong> to hide a message or{" "}
+						<strong class="font-semibold text-slate-100">{DECIPHER_ACTION_TEXT}</strong> to reveal one that was
 						ciphered before.
 					</li>
 					<li>
@@ -32,8 +33,8 @@ import Layout from "../layouts/Layout.astro"
 						words with &ntilde; are handled correctly.
 					</li>
 					<li>
-						Write your message in the <strong class="font-semibold text-slate-100">Text to
-						cipher</strong> field.
+						Write your message in the <strong class="font-semibold text-slate-100">Text to{" "}
+						{CIPHER_ACTION_TEXT.toLowerCase()}</strong> field.
 					</li>
 					<li>
 						Set the <strong class="font-semibold text-slate-100">Shift</strong> value between{" "}
@@ -42,13 +43,12 @@ import Layout from "../layouts/Layout.astro"
 						each letter will move.
 					</li>
 					<li>
-						Press the <strong class="font-semibold text-slate-100">Cipher</strong> button. The
-						button label changes to <strong class="font-semibold text-slate-100">Decipher</strong>{" "}
+						Press the <strong class="font-semibold text-slate-100">{CIPHER_ACTION_TEXT}</strong> button. The
+						button label changes to <strong class="font-semibold text-slate-100">{DECIPHER_ACTION_TEXT}</strong>{" "}
 						when Decrypt mode is active.
 					</li>
 					<li>
-						The result will appear in the <strong class="font-semibold text-slate-100">Result</strong>{" "}
-						field below.
+						The result will appear in the textbox below.
 					</li>
 				</ol>
 			</section>
@@ -56,12 +56,12 @@ import Layout from "../layouts/Layout.astro"
 			<section class="space-y-3">
 				<h2 class="text-2xl font-semibold text-slate-100">A quick example</h2>
 				<p>
-					With <strong class="font-semibold text-slate-100">Encrypt</strong> mode, the{" "}
+					With <strong class="font-semibold text-slate-100">{CIPHER_ACTION_TEXT}</strong> mode, the{" "}
 					<strong class="font-semibold text-slate-100">English</strong> vocabulary and a shift of{" "}
 					<strong class="font-semibold text-slate-100">3</strong>, typing{" "}
 					<span class="text-slate-100">hello</span> produces{" "}
 					<span class="text-slate-100">khoor</span>. Switch to{" "}
-					<strong class="font-semibold text-slate-100">Decrypt</strong> mode, type{" "}
+					<strong class="font-semibold text-slate-100">{DECIPHER_ACTION_TEXT}</strong> mode, type{" "}
 					<span class="text-slate-100">khoor</span> with the same shift, and you get{" "}
 					<span class="text-slate-100">hello</span> back.
 				</p>
